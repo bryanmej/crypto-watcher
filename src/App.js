@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HeaderNav from "./components/HeaderNav";
 import Homepage from "./views/Homepage";
-// import Coinpage from "./views/Coinpage";
+import Coinpage from "./views/Coinpage";
 // import Homepage from "./views/Homepage";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
         <HeaderNav />
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/coin" element={<Coinpage/>} />
         </Routes>
       </BrowserRouter>
     </div>

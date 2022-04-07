@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Container, createTheme, makeStyles, MenuItem, Select, ThemeProvider, Toolbar, Typography } from "@material-ui/core";
 import {useNavigate} from "react-router-dom"
+import { CryptoState } from "../AppContext";
 
 const useStyles = makeStyles(()=>({
   title: {
@@ -14,6 +15,10 @@ const useStyles = makeStyles(()=>({
 
 
 const HeaderNav = () => {
+  const {currency, setCurrency} = CryptoState()
+
+  console.log(currency)
+  
   const classes = useStyles()
   const navigate = useNavigate()
   const darkTheme = createTheme({
@@ -31,13 +36,20 @@ const HeaderNav = () => {
       <Container>
         <Toolbar>
           <Typography onClick={()=> navigate("/")} className={classes.title}>Crypto Watcher</Typography>
-          <Select variant="outlined" style={{
+          <Select 
+            variant="outlined" 
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={currency}
+            style={{
             width: 100,
             height: 40,
             marginLeft: 15,
-          }}>
-            <MenuItem>USD</MenuItem>
-            <MenuItem>MXN</MenuItem>
+            }}
+            onChange={(e)=> setCurrency(e.target.value)}
+            >
+            <MenuItem value={"USD"}>USD</MenuItem>
+            <MenuItem value={"MXN"}>MXN</MenuItem>
           </Select>
         </Toolbar>
       </Container>

@@ -16,8 +16,6 @@ const useStyles = makeStyles(()=>({
 
 const HeaderNav = () => {
   const {currency, setCurrency} = CryptoState()
-
-  console.log(currency)
   
   const classes = useStyles()
   const navigate = useNavigate()

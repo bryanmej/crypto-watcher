@@ -1,7 +1,66 @@
-import React from "react";
+import { makeStyles } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { CryptoState } from "../AppContext";
+import CoinInfo from "../components/CoinInfo";
+import { SingleCoin } from "../config/api";
 
 const Coinpage = () => {
-  return <div>coinpage</div>;
+  const { id } = useParams();
+  const [coin, setCoin] = useState();
+
+  const { currency } = CryptoState;
+
+  const fetchCoin = async () => {
+    const data = await fetch(SingleCoin(id));
+    const dataJson = await data.json();
+    setCoin(dataJson);
+  };
+
+  useEffect(() => {
+    fetchCoin();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const useStyles = makeStyles((theme) => ({
+    container: {
+      display: "flex",
+      [theme.breakpoints.down("md")]: {
+        flexDirection: "column",
+        alignItems: "center",
+      },
+    },
+    sidebar: {
+      width: "30%",
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+      },
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginTop: 25,
+      borderRight: "2px solid grey",
+    },
+  }));
+
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <div className={classes.sidebar}>
+        <img
+          src={coin?.image.large}
+          alt={coin?.name}
+          height="200"
+          style={{
+            marginBottom: 20,
+          }}
+        />
+      </div>
+      <CoinInfo />
+    </div>
+  );
 };
 
 export default Coinpage;

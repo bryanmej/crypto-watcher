@@ -53,7 +53,11 @@ const CryptosTable = () => {
   });
 
   const handleSearch = () => {
-    return coins.filter((coin) => coin.name.toLowerCase().includes(search));
+    return coins.filter(
+      (coin) =>
+        coin.name.toLowerCase().includes(search) ||
+        coin.symbol.toLowerCase().includes(search)
+    );
   };
 
   const useStyles = makeStyles(() => ({
@@ -98,7 +102,7 @@ const CryptosTable = () => {
                         fontWeight: "700",
                       }}
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      align={head === "Coin" ? "inherit" : "right"}
                     >
                       {head}
                     </TableCell>
@@ -113,7 +117,7 @@ const CryptosTable = () => {
 
                     return (
                       <TableRow
-                        onClick={() => navigate(`/coins/${row.id}`)}
+                        onClick={() => navigate(`/coin/${row.id}`)}
                         className={classes.row}
                         key={row.name}
                       >
@@ -188,7 +192,7 @@ const CryptosTable = () => {
             justifyContent: "center",
           }}
           classes={{ ul: classes.pagination }}
-          count={(handleSearch().length / 10).toFixed(0)}
+          count={(handleSearch()?.length / 10).toFixed(0)}
           onChange={(_, value) => {
             setPage(value);
             window.scroll(0, 450);

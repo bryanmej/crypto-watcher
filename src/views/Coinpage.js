@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptoState } from "../AppContext";
@@ -42,6 +42,10 @@ const Coinpage = () => {
       marginTop: 25,
       borderRight: "2px solid grey",
     },
+    heading: {
+      fontWeight: "bold",
+      marginBottom: 20,
+    },
   }));
 
   const classes = useStyles();
@@ -57,8 +61,14 @@ const Coinpage = () => {
             marginBottom: 20,
           }}
         />
+        <Typography variant="h3" className={classes.heading}>
+          {coin?.name}
+        </Typography>
+        <Typography variant="subtitle1" className={classes.description}>
+          {coin?.description.en.split(", ")[0]}
+        </Typography>
       </div>
-      <CoinInfo />
+      <CoinInfo coin={coin} />
     </div>
   );
 };

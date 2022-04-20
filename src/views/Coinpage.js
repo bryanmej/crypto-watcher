@@ -27,6 +27,7 @@ const Coinpage = () => {
   const useStyles = makeStyles((theme) => ({
     container: {
       display: "flex",
+      paddingBottom: 40,
       [theme.breakpoints.down("md")]: {
         flexDirection: "column",
         alignItems: "center",

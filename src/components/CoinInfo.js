@@ -8,6 +8,8 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { CryptoState } from "../AppContext";
 import { HistoricalChart } from "../config/api";
+import { chartDays } from "../config/utilities";
+import ChartButton from "./ChartButton";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -44,6 +46,8 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchHistoryData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, days]);
 
   const darkTheme = createTheme({
@@ -113,6 +117,26 @@ const CoinInfo = ({ coin }) => {
                 },
               }}
             />
+            <div
+              style={{
+                display: "flex",
+                marginTop: 20,
+                justifyContent: "space-around",
+                width: "100%",
+              }}
+            >
+              {chartDays.map((day) => (
+                <ChartButton
+                  key={day.value}
+                  onClick={() => {
+                    setDays(day.value);
+                  }}
+                  selected={day.value === days}
+                >
+                  {day.label}
+                </ChartButton>
+              ))}
+            </div>
           </>
         )}
       </div>

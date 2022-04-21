@@ -19,7 +19,6 @@ const ChartButton = ({ children, selected, onClick }) => {
         color: "black",
       },
       width: "22%",
-      //   margin: 5,
     },
   });
 

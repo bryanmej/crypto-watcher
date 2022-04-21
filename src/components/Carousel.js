@@ -2,8 +2,9 @@ import { makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
-import { CryptoState } from "../../AppContext";
-import { TrendingCoins } from "../../config/api";
+import { CryptoState } from "../AppContext";
+import { TrendingCoins } from "../config/api";
+import { numberWithCommas } from "../config/utilities";
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -20,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
 }));
-
-export const numberWithCommas = (x) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
 
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
@@ -45,7 +42,7 @@ const Carousel = () => {
   const items = trending.map((coin) => {
     let profit = coin.price_change_percentage_24h >= 0;
     return (
-      <Link className={classes.carouselItem} to={`/coins/${coin.id}`}>
+      <Link className={classes.carouselItem} to={`/coin/${coin.id}`}>
         <img
           src={coin.image}
           alt={coin.name}

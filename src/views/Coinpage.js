@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { CryptoState } from "../AppContext";
 import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
-import { numberWithCommas } from "../components/banner/Carousel";
+import { numberWithCommas } from "../config/utilities";
 
 const Coinpage = () => {
   const { id } = useParams();

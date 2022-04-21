@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import { CryptoState } from "../AppContext";
 import { CoinList } from "../config/api";
 import { useNavigate } from "react-router-dom";
-import { numberWithCommas } from "./banner/Carousel";
+import { numberWithCommas } from "../config/utilities";
 import { Pagination } from "@material-ui/lab";
 
 const CryptosTable = () => {

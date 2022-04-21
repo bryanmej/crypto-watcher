@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { CryptoState } from "../AppContext";
 import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
-import { numberWithCommas } from "../config/utilities";
+import { dataFetch, numberWithCommas } from "../config/utilities";
 
 const Coinpage = () => {
   const { id } = useParams();
@@ -12,15 +12,8 @@ const Coinpage = () => {
 
   const { currency } = CryptoState();
 
-  const fetchCoin = async () => {
-    const data = await fetch(SingleCoin(id));
-    const dataJson = await data.json();
-    setCoin(dataJson);
-  };
-
   useEffect(() => {
-    fetchCoin();
-
+    dataFetch(SingleCoin(id), setCoin);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,6 +70,7 @@ const Coinpage = () => {
   const classes = useStyles();
 
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
+  console.log(coin);
 
   return (
     <div className={classes.container}>
@@ -95,24 +89,24 @@ const Coinpage = () => {
         <Typography variant="subtitle1" className={classes.description}>
           <span
             dangerouslySetInnerHTML={{
-              __html: coin?.description.en.split(", ")[0],
+              __html: coin?.description.en.split(". ")[0],
             }}
           />
         </Typography>
         <div className={classes.marketData}>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Rank:
             </Typography>
             &nbsp; &nbsp;
-            <Typography variant="h5">{coin?.market_cap_rank}</Typography>
+            <Typography variant="h6">{coin?.market_cap_rank}</Typography>
           </span>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Current Price:
             </Typography>
             &nbsp; &nbsp;
-            <Typography variant="h5">
+            <Typography variant="h6">
               $
               {numberWithCommas(
                 coin?.market_data.current_price[currency.toLowerCase()]
@@ -120,11 +114,11 @@ const Coinpage = () => {
             </Typography>
           </span>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Market Cap:
             </Typography>
             &nbsp; &nbsp;
-            <Typography variant="h5">
+            <Typography variant="h6">
               $
               {numberWithCommas(
                 coin?.market_data.market_cap[currency.toLowerCase()]

@@ -1,15 +1,10 @@
-import {
-  CircularProgress,
-  createTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { CryptoState } from "../AppContext";
 import { HistoricalChart } from "../config/api";
-import { chartDays } from "../config/utilities";
+import { chartDays, darkTheme } from "../config/utilities";
 import ChartButton from "./ChartButton";
+import { CircularProgress, makeStyles, ThemeProvider } from "@material-ui/core";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -40,24 +35,13 @@ const CoinInfo = ({ coin }) => {
   const fetchHistoryData = async () => {
     const data = await fetch(HistoricalChart(coin.id, days, currency));
     const dataJson = await data.json();
-
     setHistoryData(dataJson.prices);
   };
 
   useEffect(() => {
     fetchHistoryData();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, days]);
-
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#fff",
-      },
-      type: "dark",
-    },
-  });
 
   const useStyles = makeStyles((theme) => ({
     container: {

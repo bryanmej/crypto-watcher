@@ -1,8 +1,13 @@
+import React, { useEffect, useState } from "react";
+import { CryptoState } from "../AppContext";
+import { CoinList } from "../config/api";
+import { useNavigate } from "react-router-dom";
+import { numberWithCommas, darkTheme } from "../config/utilities";
+import { Pagination } from "@material-ui/lab";
 import {
   Container,
   ThemeProvider,
   Typography,
-  createTheme,
   TextField,
   TableContainer,
   LinearProgress,
@@ -13,12 +18,6 @@ import {
   TableBody,
   makeStyles,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { CryptoState } from "../AppContext";
-import { CoinList } from "../config/api";
-import { useNavigate } from "react-router-dom";
-import { numberWithCommas } from "../config/utilities";
-import { Pagination } from "@material-ui/lab";
 
 const CryptosTable = () => {
   const [coins, setCoins] = useState([]);
@@ -42,15 +41,6 @@ const CryptosTable = () => {
     fetchCoins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
-
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#fff",
-      },
-      type: "dark",
-    },
-  });
 
   const handleSearch = () => {
     return coins.filter(
@@ -78,7 +68,7 @@ const CryptosTable = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container style={{ textAlign: "center" }}>
+      <Container style={{ textAlign: "center", position: "relative" }}>
         <Typography variant="h4" style={{ margin: 18 }}>
           Cryptocurrency Prices by Market Capitalization
         </Typography>

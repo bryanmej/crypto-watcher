@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { CryptoState } from "../AppContext";
 import {
   AppBar,
   Container,
@@ -10,12 +12,12 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
-import { CryptoState } from "../AppContext";
 
 const useStyles = makeStyles(() => ({
   title: {
-    flex: 1,
+    border: "3px solid",
+    borderRadius: "50%",
+    padding: 6,
     color: "gold",
     fontWeight: "bold",
     cursor: "pointer",
@@ -30,7 +32,7 @@ const HeaderNav = () => {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#fff",
+        main: "#16171a",
       },
       type: "dark",
     },
@@ -38,11 +40,11 @@ const HeaderNav = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar color="transparent" position="static">
+      <AppBar color="primary" position="relative">
         <Container>
           <Toolbar>
             <Typography onClick={() => navigate("/")} className={classes.title}>
-              Crypto Watcher
+              CW
             </Typography>
             <Select
               variant="outlined"
@@ -52,7 +54,7 @@ const HeaderNav = () => {
               style={{
                 width: 100,
                 height: 40,
-                marginLeft: 15,
+                marginLeft: "auto",
               }}
               onChange={(e) => setCurrency(e.target.value)}
             >

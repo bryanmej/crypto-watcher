@@ -4,7 +4,7 @@ import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
 import { CryptoState } from "../AppContext";
 import { TrendingCoins } from "../config/api";
-import { numberWithCommas } from "../config/utilities";
+import { dataFetch, numberWithCommas } from "../config/utilities";
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -25,17 +25,10 @@ const useStyles = makeStyles((theme) => ({
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
   const classes = useStyles();
-
   const { currency } = CryptoState();
 
-  const fetchTrendingCryptos = async () => {
-    const data = await fetch(TrendingCoins(currency));
-    const dataJson = await data.json();
-    setTrending(dataJson);
-  };
-
   useEffect(() => {
-    fetchTrendingCryptos();
+    dataFetch(TrendingCoins(currency), setTrending);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
@@ -85,6 +78,7 @@ const Carousel = () => {
         autoPlayInterval={1000}
         animationDuration={1500}
         disableDotsControls
+        disableButtonsControls
         responsive={responsive}
         autoPlay
         items={items}

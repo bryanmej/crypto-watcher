@@ -3,9 +3,6 @@ import React from "react";
 import Carousel from "./Carousel";
 
 const useStyles = makeStyles(() => ({
-  banner: {
-    backgroundImage: "url(./bannerImage.jpg)",
-  },
   bannerContent: {
     height: 400,
     display: "flex",
@@ -34,7 +31,9 @@ const Banner = () => {
             style={{
               fontWeight: "bold",
               marginBottom: 15,
+              color: "gold",
               fontFamily: "Montserrat",
+              position: "relative",
             }}
           >
             Crypto Watcher

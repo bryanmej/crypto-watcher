@@ -32,7 +32,7 @@ const HeaderNav = () => {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#16171a",
+        main: "#131111",
       },
       type: "dark",
     },

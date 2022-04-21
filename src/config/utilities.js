@@ -41,16 +41,16 @@ export const chartDays = [
 export const options = {
   background: {
     color: {
-      value: "#000",
+      value: "grey",
     },
   },
   fpsLimit: 120,
   particles: {
     color: {
-      value: "#ffffff",
+      value: "#fff",
     },
     links: {
-      color: "#ffffff",
+      color: "#fff",
       distance: 150,
       enable: true,
       opacity: 0.5,
